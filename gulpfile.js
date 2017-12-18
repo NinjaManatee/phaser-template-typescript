@@ -104,7 +104,8 @@ gulp.task("build", () => {
 
 gulp.task("watch", ["default"], () => {
 	browserSync.init({
-		server: "."
+		server: "dist",
+		startPath: "/"
 	});
 
 	gulp.watch(["src/**/**.ts", "test/**/*.ts"], ["default"]);
@@ -112,6 +113,6 @@ gulp.task("watch", ["default"], () => {
 });
 
 gulp.task("default", (cb) => {
-	runSequence("lint", "build-test", "copyStatic", "test", "build", cb);
+	runSequence("lint", /*"build-test", "test",*/ "copyStatic", "build", cb);
 });
 // #endregion
