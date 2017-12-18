@@ -19,7 +19,7 @@ const uglify = require("gulp-uglify");
 
 // #region CONSTANTS
 const tsTestProject = tsc.createProject("tsconfig.json");
-const libraryName = "myApp";
+const libraryName = "bundle";
 const mainTsFilePath = path.join("src", "main.ts");
 const outputFolder = "dist";
 const buildFolder = "build";
@@ -70,9 +70,13 @@ gulp.task("istanbul:hook", () => {
 		.pipe(istanbul.hookRequire());
 });
 
-gulp.task("copyAssets", () => {
-	gulp.src("assets/**/*")
-	.pipe(gulp.dest(outputFolder));
+gulp.task("copyStatic", () => {
+	gulp
+		.src("assets/**/*")
+		.pipe(gulp.dest(outputFolder));
+	gulp
+		.src("node_modules/phaser/build/phaser.min.js")
+		.pipe(gulp.dest(path.join(outputFolder, "js")));
 });
 
 gulp.task("test", ["istanbul:hook"], () => {
@@ -97,7 +101,7 @@ gulp.task("build", () => {
 		.pipe(sourcemaps.init({ loadMaps: true }))
 		.pipe(uglify())
 		.pipe(sourcemaps.write("."))
-		.pipe(gulp.dest(outputFolder));
+		.pipe(gulp.dest(path.join(outputFolder, "js")));
 });
 
 gulp.task("watch", ["default"], () => {
@@ -110,6 +114,6 @@ gulp.task("watch", ["default"], () => {
 });
 
 gulp.task("default", (cb) => {
-	runSequence("lint", "build-test", "copyAssets", "test", "build", cb);
+	runSequence("lint", "build-test", "copyStatic", "test", "build", cb);
 });
 // #endregion
