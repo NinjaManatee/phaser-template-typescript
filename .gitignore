@@ -57,5 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
-# Directory where compile resources go
-build/
+# Directories where compiled resources go
+build
+dist
