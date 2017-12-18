@@ -1,4 +1,4 @@
-const { Phaser } = require("phaser");
+/// <reference path="../node_modules/phaser/typescript/phaser.d.ts" /> 
 
 window.onload = () => {
 
