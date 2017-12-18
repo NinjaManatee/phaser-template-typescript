@@ -70,6 +70,11 @@ gulp.task("istanbul:hook", () => {
 		.pipe(istanbul.hookRequire());
 });
 
+gulp.task("copyAssets", () => {
+	gulp.src("assets/**/*")
+	.pipe(gulp.dest(outputFolder));
+});
+
 gulp.task("test", ["istanbul:hook"], () => {
 	return gulp.src("test/**/*.test.js")
 		.pipe(mocha({ ui: "bdd" }))
@@ -105,6 +110,6 @@ gulp.task("watch", ["default"], () => {
 });
 
 gulp.task("default", (cb) => {
-	runSequence("lint", "build-test", "test", "build", cb);
+	runSequence("lint", "build-test", "copyAssets", "test", "build", cb);
 });
 // #endregion
