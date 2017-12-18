@@ -48,9 +48,7 @@ gulp.task("build-test", () => {
 			"test/**/**.test.ts",
 			"typings/main.d.ts/",
 			"src/interfaces/interfaces.d.ts"
-		],
-		{ base: "." }
-		)
+		])
 		.pipe(tsTestProject())
 		.on(
 		"error",
@@ -59,7 +57,7 @@ gulp.task("build-test", () => {
 			process.exit(1);
 		})
 		.js
-		.pipe(gulp.dest("."));
+		.pipe(gulp.dest(buildFolder));
 });
 
 gulp.task("istanbul:hook", () => {
