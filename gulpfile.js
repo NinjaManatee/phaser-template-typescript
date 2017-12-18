@@ -20,7 +20,7 @@ const uglify = require("gulp-uglify");
 // #region CONSTANTS
 const tsTestProject = tsc.createProject("tsconfig.json");
 const libraryName = "myApp";
-const mainTsFilePath = path.join("src", "main.ts";
+const mainTsFilePath = path.join("src", "main.ts");
 const outputFolder = "dist";
 const buildFolder = "build";
 const outputFileName = libraryName + ".min.js";
