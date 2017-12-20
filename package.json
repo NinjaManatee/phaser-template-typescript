@@ -13,6 +13,7 @@
   "author": "NinjaManatee",
   "license": "MIT",
   "devDependencies": {
+    "@types/chai": "^4.0.10",
     "@types/mocha": "^2.2.44",
     "browser-sync": "^2.18.13",
     "browserify": "^14.5.0",
@@ -24,7 +25,6 @@
     "gulp-tslint": "^8.1.2",
     "gulp-typescript": "^3.2.3",
     "gulp-uglify": "^3.0.0",
-    "run-sequence": "^2.2.0",
     "tsify": "^3.0.4",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2",
