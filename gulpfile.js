@@ -43,7 +43,10 @@ gulp.task(
 			.pipe(tslint.report());
 	});
 
-gulp.task("build-test", ["lint"], () => {
+gulp.task(
+	"build-test",
+	["lint"],
+	() => {
 	return gulp
 		.src([
 			"src/**/*.ts",
@@ -69,7 +72,7 @@ gulp.task("istanbul:hook", () => {
 		.pipe(istanbul.hookRequire());
 });
 
-gulp.task("copyStatic", () => {
+gulp.task("copy-static", () => {
 	gulp
 		.src("assets/**/*")
 		.pipe(gulp.dest(outputFolder));
@@ -92,9 +95,8 @@ gulp.task(
 
 gulp.task(
 	"build",
-	[
-		"copyStatic"
-	], () => {
+	["copy-static"],
+	() => {
 		const bundler = browserify({
 			debug: true,
 			standalone: libraryName
@@ -113,7 +115,10 @@ gulp.task(
 			.pipe(gulp.dest(path.join(outputFolder, "js")));
 	});
 
-gulp.task("watch", ["default"], () => {
+gulp.task(
+	"watch",
+	["default"],
+	() => {
 	browserSync
 		.init({
 			server: outputFolder,
@@ -135,5 +140,5 @@ gulp.task("watch", ["default"], () => {
 		.on("change", browserSync.reload);
 });
 
-gulp.task("default", ["test"]);
+gulp.task("default", ["test", "build"]);
 // #endregion
