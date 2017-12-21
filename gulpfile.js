@@ -17,7 +17,7 @@ const uglify = require("gulp-uglify");
 // #endregion
 
 // #region Constants
-const tsTestProject = tsc.createProject("tsconfig.json");
+const tsConfig = tsc.createProject("tsconfig.json");
 const libraryName = "bundle";
 const mainTsFilePath = path.join("src", "main.ts");
 const outputFolder = "dist";
@@ -48,16 +48,17 @@ gulp.task("build-test", ["lint"], () => {
 		.src([
 			"src/**/*.ts",
 			"test/**/*.test.ts"
-		])
-		.pipe(tsTestProject())
-		.on(
-		"error",
+		], {
+			base: "./"
+		})
+		.pipe(tsConfig())
+		.on("error",
 		(err) => {
 			console.error(err);
 			process.exit(1);
 		})
 		.js
-		.pipe(gulp.dest(path.join(buildFolder, "test")));
+		.pipe(gulp.dest(buildFolder));
 });
 
 gulp.task("istanbul:hook", () => {
